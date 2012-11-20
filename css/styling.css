@@ -1,0 +1,62 @@
+body, html {
+	background-color: #000000;
+	color: #4a4a4a;
+	font-family: "Trebuchet MS", Verdana;
+	margin: 0;
+	padding: 0;
+}
+
+#canvas-element {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+}
+#drop-area {
+	position: absolute;
+	top: 0px;
+	z-index: 200;
+	text-align: center;
+	width: 100%;
+}
+#info {
+	position: absolute;
+	bottom: 20px;
+	right: 10px;
+	z-index: 100;
+	font-size: 12px;
+	line-height:20px;
+	text-align: right;
+}
+
+#play-log {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	height: 20px;
+	color: #555555;
+	font-family: consolas;
+	font-size: 14px;
+	text-align: left;
+}
+#dnd-text {
+	position: relative;
+	top: 40%;
+	color: #4a4a4a;
+	font-size: 18px;
+}
+#navi {
+	display: none;
+}
+#prev , #next, #load-sample{
+	cursor: pointer;
+	font-size: 18px;
+	color: #666;
+	-webkit-transition: 0.2s;
+	-moz-transition: 0.2s;
+	transition: 0.2s;
+}
+#prev:hover, #next:hover, #loadSample:hover {color: #c03d1b;}
+a {text-decoration: underline;}

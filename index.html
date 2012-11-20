@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML5 Canvas visualizer</title>
+    <meta charset="utf-8">
+    <meta http-equiv="content-language" content="en">
+    <meta name="description" content="A web page that draws audio visualizations on a canvas element." />
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/styling.css">
+    <script data-main="js/main" src="js/require.js"></script>
+  </head>
+  <body>
+    <div id="drop-area">
+      <img src="images/header.png" alt="html5 canvas visualizer"><br>
+      <nav id="navi">
+        <span id="prev">prev</span> d(-_-)b <span id="next">next</span><br>
+      </nav>
+      <span id="dnd-text">Drop audio file (.mp3, .ogg, .wav, .m4a) here or load
+      <a id="load-sample">"Bubbatron" by zifi.</a></span>
+      <div id="info">2012 Vesa Uimonen & Lari Marsalo<br />Using Web Audio API</div>
+      <div id="play-log"></div>
+    </div>
+    <canvas id="canvas-element">
+    </canvas>
+  </body>
+</html>
