@@ -1,9 +1,17 @@
 body, html {
 	background-color: #000000;
 	color: #4a4a4a;
-	font-family: "Trebuchet MS", Verdana;
+	font-family: "Lato", Arial;
 	margin: 0;
 	padding: 0;
+}
+a {
+	color: #179faa;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
 }
 
 #canvas-element {
@@ -30,7 +38,6 @@ body, html {
 	line-height:20px;
 	text-align: right;
 }
-
 #play-log {
 	position: absolute;
 	top: 10px;
@@ -50,13 +57,14 @@ body, html {
 #navi {
 	display: none;
 }
-#prev , #next, #load-sample{
+#load-sample {
+	cursor: pointer;
+}
+#prev, #next, #load-sample {
 	cursor: pointer;
 	font-size: 18px;
-	color: #666;
 	-webkit-transition: 0.2s;
 	-moz-transition: 0.2s;
 	transition: 0.2s;
 }
-#prev:hover, #next:hover, #loadSample:hover {color: #c03d1b;}
-a {text-decoration: underline;}
+#prev:hover, #next:hover, #load-sample:hover {color: #c03d1b;}

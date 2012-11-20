@@ -37,6 +37,9 @@ define([
     ];
 
   var initialize = function () {
+    var leftArrow = 37,
+      rightArrow = 39;
+
     onResize();
     $(window).resize(function () {
       onResize();
@@ -56,9 +59,9 @@ define([
 
     // Arrow navigation
     $(document).keydown(function (e) {
-      if (e.keyCode == 37) {
+      if (e.keyCode === leftArrow) {
         prevVisualization();
-      } else if (e.keyCode == 39) {
+      } else if (e.keyCode === rightArrow) {
         nextVisualization();
       }
     });
