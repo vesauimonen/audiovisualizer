@@ -16,13 +16,13 @@ define([
   waveVis, circleBarVis, starfieldVis, barVis) {
   'use strict';
 
-  var canvas = document.getElementById('canvas-element'),
+  var canvas = document.getElementById('canvas'),
     dropArea = document.getElementById('drop-area'),
     loadSample = $('#load-sample'),
-    dndText = $('#dnd-text'),
+    dndText = $('#drop-text'),
     nextText = $('#next'),
     prevText = $('#prev'),
-    navigation = $('#navi'),
+    navigation = $('#navigation'),
     playLog = $('#play-log'),
     audioContext = new webkitAudioContext(),
     audioSource = audioContext.createBufferSource(),

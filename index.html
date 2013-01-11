@@ -11,19 +11,23 @@
     <script data-main="js/main" src="js/require.js"></script>
   </head>
   <body>
-    <div id="drop-area">
+    <div id="drop-area" class="drop-area">
       <img src="images/header.png" alt="html5 canvas visualizer"><br>
-      <nav id="navi">
-        <span id="prev">prev</span> d(-_-)b <span id="next">next</span><br>
+      <nav id="navigation" class="nav hidden">
+        <a id="prev">prev</a> d(-_-)b <a id="next" >next</a><br>
       </nav>
-      <span id="dnd-text">
-        Drop audio file here or load "<a id="load-sample">Bubbatron</a>" by
+      <span id="drop-text" class="drop-text">
+        Drop audio file here or load "<a id="load-sample" class="pointer">Bubbatron</a>" by
         <a href="http://soundcloud.com/zifi">Antti Sartjärvi</a>.
       </span>
-      <div id="info">2012 Vesa Uimonen & Lari Marsalo<br />Using Web Audio API</div>
-      <div id="play-log"></div>
+      <div id="info" class="info">
+        <p>2012 Vesa Uimonen & Lari Marsalo</p>
+        <p>Using Web Audio API</p>
+      </div>
+      <div id="play-log" class="log">
+      </div>
     </div>
-    <canvas id="canvas-element">
+    <canvas id="canvas" class="canvas">
     </canvas>
   </body>
 </html>

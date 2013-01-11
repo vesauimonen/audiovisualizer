@@ -14,7 +14,7 @@ a:hover {
 	text-decoration: underline;
 }
 
-#canvas-element {
+.canvas {
 	display: none;
 	position: fixed;
 	top: 0;
@@ -22,14 +22,14 @@ a:hover {
 	margin: 0;
 	padding: 0;
 }
-#drop-area {
+.drop-area {
 	position: absolute;
-	top: 0px;
-	z-index: 200;
+	top: 0;
+	z-index: 101;
 	text-align: center;
 	width: 100%;
 }
-#info {
+.info {
 	position: absolute;
 	bottom: 20px;
 	right: 10px;
@@ -38,7 +38,7 @@ a:hover {
 	line-height:20px;
 	text-align: right;
 }
-#play-log {
+.log {
 	position: absolute;
 	top: 10px;
 	left: 10px;
@@ -48,23 +48,27 @@ a:hover {
 	font-size: 14px;
 	text-align: left;
 }
-#dnd-text {
+.drop-text {
 	position: relative;
 	top: 40%;
 	color: #4a4a4a;
 	font-size: 18px;
 }
-#navi {
+.hidden {
 	display: none;
 }
-#load-sample {
+.pointer {
 	cursor: pointer;
 }
-#prev, #next, #load-sample {
+.nav a {
 	cursor: pointer;
 	font-size: 18px;
 	-webkit-transition: 0.2s;
 	-moz-transition: 0.2s;
 	transition: 0.2s;
 }
-#prev:hover, #next:hover, #load-sample:hover {color: #c03d1b;}
+
+.nav a:hover {
+	color: #c03d1b;
+	text-decoration: none;
+}
