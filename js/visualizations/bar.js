@@ -6,25 +6,38 @@ define(function () {
     var canvasWidth = canvas.width,
       canvasHeight = canvas.height,
       bars = 200,
-      freqOffset = 100,
+      frequencyOffset = 100,
       spaceWidth = 2,
       barWidth = (canvasWidth / bars) * 2,
       data = new Uint8Array(2048);
 
-    // Retrieving frequency data
     audioAnalyser.getByteFrequencyData(data);
+    // Describes the frequency block size of each individual visual element,
+    // in this case a bar.
+    var frequencyBlockSize = Math.floor(
+      (data.length - frequencyOffset) / bars
+    );
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    var piece = Math.floor((data.length - freqOffset) / bars);
-
-    // Drawing bars
     for (var i = 0; i < bars; i++) {
-      var magnitude = data[i * piece];
+      var magnitude = data[i * frequencyBlockSize];
       var scaled_magnitude = (magnitude / 256);
       if (magnitude > 0) {
         var color = Math.floor((1 - scaled_magnitude) * 255);
-        ctx.fillStyle = 'rgb(' + 255 + ',' + color + ',' + 0 + ')';
-        ctx.fillRect(i * barWidth, canvasHeight,
-          barWidth - spaceWidth, -magnitude);
+        ctx.fillStyle = 'rgb(' + color + ',' + 255 + ',' + 0 + ')';
+        ctx.fillRect(
+          i * barWidth,
+          canvasHeight * 0.6,
+          barWidth - spaceWidth,
+          -magnitude
+        );
+        ctx.fillStyle = 'rgba(' + color + ',' + 255 +
+          ',' + 0 + ',' + 0.3 + ')';
+        ctx.fillRect(
+          i * barWidth,
+          canvasHeight * 0.6,
+          barWidth - spaceWidth,
+          magnitude / 2
+        );
       }
     }
   };
