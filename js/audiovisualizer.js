@@ -16,7 +16,6 @@ define([
   waveVis, circleBarVis, starfieldVis, barVis) {
   'use strict';
 
-
   // Array of visualizations in use. Add any new visualization modules here.
   var visualizations = [
     waveVis,
@@ -24,11 +23,10 @@ define([
     starfieldVis,
     barVis
   ];
-
   var canvas = document.getElementById('canvas'),
     dropArea = document.getElementById('drop-area'),
     loadSample = $('#load-sample'),
-    dndText = $('#drop-text'),
+    dragAndDropText = $('#drop-text'),
     nextText = $('#next'),
     prevText = $('#prev'),
     navigation = $('#navigation'),
@@ -40,7 +38,6 @@ define([
     animationRequest,
     sampleAudioUrl = 'sample/zifi_-_bubbatrone.mp3',
     currentVisualization = 0;
-
 
   var initialize = function () {
     addResizeListener();
@@ -85,7 +82,7 @@ define([
   };
 
   var playAudio = function(audio) {
-    dndText.fadeOut('slow');
+    dragAndDropText.fadeOut('slow');
     playLog.append('Loading audio...<br>');
     if (typeof(audio) === 'string') {
       // Sample audio decoder
@@ -156,7 +153,6 @@ define([
   };
 
   var onResize = function() {
-    // Resizing canvas & drag n drop zone
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     $(dropArea).css('height', $(window).height());
