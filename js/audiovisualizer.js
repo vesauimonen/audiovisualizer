@@ -16,6 +16,15 @@ define([
   waveVis, circleBarVis, starfieldVis, barVis) {
   'use strict';
 
+
+  // Array of visualizations in use. Add any new visualization modules here.
+  var visualizations = [
+    waveVis,
+    circleBarVis,
+    starfieldVis,
+    barVis
+  ];
+
   var canvas = document.getElementById('canvas'),
     dropArea = document.getElementById('drop-area'),
     loadSample = $('#load-sample'),
@@ -30,34 +39,42 @@ define([
     ctx = canvas.getContext('2d'),
     animationRequest,
     sampleAudioUrl = 'sample/zifi_-_bubbatrone.mp3',
-    currentVisualization = 0,
-    // List of visualizations in use
-    visualizations = [
-      waveVis, circleBarVis, starfieldVis, barVis
-    ];
+    currentVisualization = 0;
+
 
   var initialize = function () {
-    var leftArrow = 37,
-      rightArrow = 39;
+    addResizeListener();
+    addDragAndDropListeners();
+    addClickListeners();
+    addKeydownListeners();
+  };
 
+  var addResizeListener = function() {
     onResize();
     $(window).resize(function () {
       onResize();
     });
+  };
 
-    // Drag n drop listeners
+  var addDragAndDropListeners = function() {
     dropArea.addEventListener('dragover', dnd.fileOver, false);
     dropArea.addEventListener('drop', function (e) {
       stopAudio();
       playAudio(dnd.fileDropped(e));
     }, false);
+  };
 
-    // Sample audio listener
+  var addClickListeners = function() {
     loadSample.click(function () {
       playAudio(sampleAudioUrl);
     });
+    nextText.click(nextVisualization);
+    prevText.click(prevVisualization);
+  };
 
-    // Arrow navigation
+  var addKeydownListeners = function() {
+    var leftArrow = 37,
+      rightArrow = 39;
     $(document).keydown(function (e) {
       if (e.keyCode === leftArrow) {
         prevVisualization();
@@ -65,11 +82,9 @@ define([
         nextVisualization();
       }
     });
-    nextText.click(nextVisualization);
-    prevText.click(prevVisualization);
   };
 
-  var playAudio = function (audio) {
+  var playAudio = function(audio) {
     dndText.fadeOut('slow');
     playLog.append('Loading audio...<br>');
     if (typeof(audio) === 'string') {
@@ -95,7 +110,7 @@ define([
     }
   };
 
-  var playBuffer = function (audioBuffer) {
+  var playBuffer = function(audioBuffer) {
     audioSource.buffer = audioBuffer;
     audioSource.loop = true;
     audioAnalyser.fftSize = 2048;
@@ -110,7 +125,7 @@ define([
     $(canvas).fadeIn('slow');
   };
 
-  var stopAudio = function () {
+  var stopAudio = function() {
     if (audioSource) {
       playLog.empty();
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -119,12 +134,12 @@ define([
     }
   };
 
-  var visualize = function () {
+  var visualize = function() {
     animationRequest = window.requestAnimationFrame(visualize);
     visualizations[currentVisualization].render(canvas, ctx, audioAnalyser);
   };
 
-  var nextVisualization = function () {
+  var nextVisualization = function() {
     if (currentVisualization === visualizations.length - 1) {
       currentVisualization = 0;
     } else {
@@ -132,7 +147,7 @@ define([
     }
   };
 
-  var prevVisualization = function () {
+  var prevVisualization = function() {
     if (currentVisualization === 0) {
       currentVisualization = visualizations.length - 1;
     } else {
@@ -140,7 +155,7 @@ define([
     }
   };
 
-  var onResize = function () {
+  var onResize = function() {
     // Resizing canvas & drag n drop zone
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
