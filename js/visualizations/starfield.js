@@ -7,24 +7,34 @@ define(function () {
       canvasHeight = canvas.height,
       lines = 15,
       dots = 180,
-      freqOffset = 1200,
-      startHeight = canvasHeight*0.3,
-      data = new Uint8Array(2048);
+      frequencyOffset = 1200,
+      startHeight = canvasHeight * 0.3,
+      data = new Uint8Array(2048),
+      frequencyBlockSize,
+      magnitude,
+      scaledMagnitude,
+      color,
+      widthHelp,
+      space,
+      dotWidth;
 
-    // Retrieving frequency data
     audioAnalyser.getByteFrequencyData(data);
+    // Describes the frequency block size of each individual visual element
+    frequencyBlockSize = Math.floor(
+      (data.length - frequencyOffset) / dots
+    );
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    var piece = Math.floor((data.length - freqOffset) / dots);
 
     // Drawing the grid with nested loops
     for (var i = 0; i < dots; i++) {
-      var magnitude = data[i * piece];
-      var scaled_magnitude = (magnitude / 256);
-      var color = 255 - Math.floor(scaled_magnitude * 255);
+      magnitude = data[i * frequencyBlockSize];
+      scaledMagnitude = (magnitude / 256);
+      color = 255 - Math.floor(scaledMagnitude * 255);
       for (var j = 0; j < lines; j++) {
-        var widthHelp = 0.4 + j*(0.6/lines);
-        var space = (canvasWidth*widthHelp)/dots;
-        var dotWidth = j/2;
+        // Todo: needs some heavy refactoring
+        widthHelp = 0.4 + j * (0.6 / lines);
+        space = (canvasWidth * widthHelp) / dots;
+        dotWidth = j / 2;
         ctx.fillStyle = 'rgb(' + color + ',' + color + ',' + 255 + ')';
         ctx.fillRect(
           i * space + (canvasWidth * ((1 - widthHelp) / 2)),

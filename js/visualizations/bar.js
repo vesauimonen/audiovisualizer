@@ -9,20 +9,24 @@ define(function () {
       frequencyOffset = 100,
       spaceWidth = 2,
       barWidth = (canvasWidth / bars) * 2,
-      data = new Uint8Array(2048);
+      data = new Uint8Array(2048),
+      frequencyBlockSize,
+      magnitude,
+      scaledMagnitude,
+      color;
 
     audioAnalyser.getByteFrequencyData(data);
-    // Describes the frequency block size of each individual visual element,
-    // in this case a bar.
-    var frequencyBlockSize = Math.floor(
+    // Describes the frequency block size of each individual visual element
+    frequencyBlockSize = Math.floor(
       (data.length - frequencyOffset) / bars
     );
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
     for (var i = 0; i < bars; i++) {
-      var magnitude = data[i * frequencyBlockSize];
-      var scaled_magnitude = (magnitude / 256);
+      magnitude = data[i * frequencyBlockSize];
+      scaledMagnitude = (magnitude / 256);
       if (magnitude > 0) {
-        var color = Math.floor((1 - scaled_magnitude) * 255);
+        color = Math.floor((1 - scaledMagnitude) * 255);
         ctx.fillStyle = 'rgb(' + color + ',' + 255 + ',' + 0 + ')';
         ctx.fillRect(
           i * barWidth,

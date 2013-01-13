@@ -6,31 +6,33 @@ define(function () {
     var canvasWidth = canvas.width,
       canvasHeight = canvas.height,
       bars = canvasWidth,
-      offset = 10,
       spaceWidth = 0,
       barWidth = 1,
-      data = new Uint8Array(2048);
+      data = new Uint8Array(2048),
+      timeBlockSize,
+      magnitude,
+      scaledMagnitude;
 
-    // Retrieve time domain data
     audioAnalyser.getByteTimeDomainData(data);
+    // Describes the time block size of each individual visual element
+    timeBlockSize = Math.floor((data.length) / bars);
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    var piece = Math.floor((data.length - offset) / bars);
 
-    // Drawing each bar
     for (var i = 0; i < bars; i++) {
-      var magnitude = data[i * piece];
-      var scaled_magnitude = (magnitude - 128) / 128;
+      magnitude = data[i * timeBlockSize];
+      // Scaling to a range of -1...1
+      scaledMagnitude = (magnitude - 128) / 128;
       ctx.fillStyle = 'rgb(' + 25 + ',' + 25 + ',' + 25 + ')';
       ctx.fillRect(
         i * barWidth,
-        canvasHeight / 2 - 75 + scaled_magnitude * 150,
+        canvasHeight / 2 - 75 + scaledMagnitude * 150,
         barWidth - spaceWidth,
         150
       );
       ctx.fillStyle = 'rgb(' + 255 + ',' + 255 + ',' + 255 + ')';
       ctx.fillRect(
         i * barWidth,
-        canvasHeight / 2 - 50 + scaled_magnitude * 100,
+        canvasHeight / 2 - 50 + scaledMagnitude * 100,
         barWidth - spaceWidth,
         100
       );
