@@ -10,10 +10,3 @@ Compatibility
 
 - Browser: Chrome 10+, Safari 6
 - Audio formats (tested): MP3, Ogg Vorbis
-
-
-
-Live demo
----------
-
-Audio visualizer demo is available at http://vesauimonen.fi/viz
