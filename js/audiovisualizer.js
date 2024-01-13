@@ -31,7 +31,7 @@ define([
     prevText = $('#prev'),
     navigation = $('#navigation'),
     playLog = $('#play-log'),
-    audioContext = new webkitAudioContext(),
+    audioContext = new window.AudioContext(),
     audioSource = audioContext.createBufferSource(),
     audioAnalyser = audioContext.createAnalyser(),
     ctx = canvas.getContext('2d'),
@@ -115,7 +115,8 @@ define([
     audioSource.connect(audioAnalyser);
     audioAnalyser.connect(audioContext.destination);
     playLog.append('playing audio...<br>');
-    audioSource.noteOn(0.0);
+    // audioSource.noteOn(0.0); // This used to work 12 years ago
+    audioSource.start();
     playLog.append('visualizing.<br>');
     visualize();
     navigation.fadeIn('slow');
